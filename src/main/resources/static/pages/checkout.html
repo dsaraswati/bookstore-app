@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="/style/style.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Bookkeeping Application | Checkout</title>
+</head>
+<body>
+
+  <nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        Acharya Bookstore
+      </a>
+      <span class="text-white-50 small"> | Checkout</span>
+    </div>
+  </nav>
+
+  <div class="container-fluid d-flex justify-content-center mt-5">
+    <div class="border-1 p-4 shadow w-25">
+      <h5 class="ab-title" th:text="${book.title}"></h5>
+      <p class="text-secondary" th:text="${book.author.name}"></p>
+      <p th:text="'&#8377; ' + ${book.price}"></p>
+      <form class="form" method="post" action="#" th:action="@{/checkout}" th:object="${checkoutRequest}">
+        <input type="hidden" name="bookId" th:value="${book.id}">
+        <div class="mb-3">
+          <label for="studentId" class="form-label">Enter your unique student Id to checkout</label>
+          <input type="text" class="form-control" name="studentId" id="studentId" placeholder="Unique Student Id"
+            th:disabled="${inventory.stock == 0}">
+        </div>
+        <div class="mb-3" th:if="${inventory.stock > 0}">
+          <input type="submit" class="btn btn-primary" value="Checkout"/>
+        </div>
+        <div class="mb-3" th:if="${inventory.stock == 0}">
+          <span class="badge bg-warning">Out of Stock</span>
+          <p class="text-center mt-2"><a href="/" class="btn btn-outline-secondary">Home</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class=" mt-4 bg-light fixed-bottom text-center text-secondary">
+    <div>&copy; Aditi & Team</div>
+  </footer>
+</body>
+</html>

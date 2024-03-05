@@ -1,0 +1,16 @@
+
+.ab-carousel {
+    height: 300px;
+    opacity: 0.8;
+}
+
+.ab-card-img-top {
+    height: 190px;
+    opacity: 0.5;
+}
+
+.ab-title {
+    width: 100% !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
