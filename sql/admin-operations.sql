@@ -13,9 +13,13 @@ VALUES (1, '<author name>', 'country');
 INSERT INTO book (id, title, author_id, price, genre)
 VALUES (1, '<title>', <author_id>, <price>, '<genre>');
 
--- Change the inventory stock to restock or remove stock for a book
-INSERT INTO inventory (book_id, store)
+-- Add a new book stock into the inventory
+INSERT INTO inventory (book_id, stock)
 VALUES (1, <number of books in inventory>);
+-- Change the inventory stock to restock or remove stock for a book
+UPDATE inventory
+SET stock = <count>
+WHERE book_id=<book_id>;
 
 -- See the order history table
 SELECT * FROM orderhistory;

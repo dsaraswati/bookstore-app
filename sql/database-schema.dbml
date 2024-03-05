@@ -1,0 +1,34 @@
+// Visit https://dbdiagram.io/d and paste this into the editor to get the database schema diagram
+
+Table inventory {
+  book_id integer [pk, ref: - book.id]
+  stock integer
+}
+
+Table book {
+  id integer [pk]
+  title varchar
+  author_id integer [ref: > author.id]
+  genre varchar
+  price double
+}
+
+Table author {
+  id integer [pk]
+  name varchar
+  country varchar
+}
+
+Table orderhistory {
+  id integer [pk]
+  book_id integer [ref: > book.id]
+  student_id varchar [ref: > student.id]
+}
+
+Table student {
+  id varchar [pk]
+  name varchar
+  course varchar
+  branch varchar
+  aaid varchar
+}

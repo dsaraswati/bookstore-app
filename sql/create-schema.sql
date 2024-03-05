@@ -18,7 +18,7 @@ CREATE TABLE book (
 
 CREATE TABLE inventory (
     book_id INT PRIMARY KEY,
-    store INT,
+    stock INT,
     CONSTRAINT inventory_bookid_fkey FOREIGN KEY (book_id) REFERENCES book(id)
 )
 
