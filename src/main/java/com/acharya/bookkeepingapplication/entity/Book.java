@@ -9,7 +9,7 @@ public class Book {
     private Integer id;
     private String title;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "authorId", referencedColumnName = "id")
     private Author author;
     private String genre;

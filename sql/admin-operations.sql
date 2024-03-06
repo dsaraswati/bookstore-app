@@ -1,7 +1,7 @@
 
 -- Add a new student who can checkout books from the store
 -- The unique student id allows the student to checkout books for themselves.
-INSERT INTO STUDENT (id, name, course, branch, aaid)
+INSERT INTO student (id, name, course, branch, aaid)
 VALUES ('<generated unique value>', '<name>', 'Bachelor of Engineering', '<branch>', '<aaid>');
 
 

@@ -1,9 +1,6 @@
 package com.acharya.bookkeepingapplication.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity(name = "orderhistory")
 public class OrderHistory {
@@ -11,14 +8,20 @@ public class OrderHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer bookId;
-    private String studentId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bookId", referencedColumnName = "id")
+    private Book book;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="studentId", referencedColumnName = "id")
+    private Student student;
 
     public OrderHistory() {}
 
-    public OrderHistory(Integer bookId, String studentId) {
-        this.bookId = bookId;
-        this.studentId = studentId;
+    public OrderHistory(Book book, Student student) {
+        this.book = book;
+        this.student = student;
     }
 
     public Integer getId() {
@@ -29,19 +32,19 @@ public class OrderHistory {
         this.id = id;
     }
 
-    public Integer getBookId() {
-        return bookId;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

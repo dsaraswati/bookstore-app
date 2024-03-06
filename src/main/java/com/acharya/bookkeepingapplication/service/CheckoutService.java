@@ -42,8 +42,7 @@ public class CheckoutService {
                 inventory.get().getStock() > 0) {
 
             inventory.get().setStock(inventory.get().getStock() - 1);
-//            inventoryRepository.save(inventory.get());
-            OrderHistory orderHistory = new OrderHistory(book.get().getId(), student.get().getId());
+            OrderHistory orderHistory = new OrderHistory(book.get(), student.get());
             orderHistoryRepository.save(orderHistory);
             return true;
         }

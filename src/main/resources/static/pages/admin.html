@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="/style/style.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Bookkeeping Application | Admin</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-danger">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      Acharya Bookstore
+    </a>
+    <span class="text-white-50 small"> | Admin</span>
+    <span><a th:href="@{'/admin/logout?token=' + ${token}}">Logout</a></span>
+  </div>
+</nav>
+
+<div class="container-fluid d-flex justify-content-center mt-5">
+  <div class="border-1 p-4 shadow w-75">
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-add-student-tab" data-bs-toggle="tab" data-bs-target="#nav-add-student" type="button" role="tab" aria-controls="nav-add-student" aria-selected="true">Add Student</button>
+        <button class="nav-link" id="nav-inventory-tab" data-bs-toggle="tab" data-bs-target="#nav-inventory" type="button" role="tab" aria-controls="nav-inventory" aria-selected="false">Inventory</button>
+        <button class="nav-link" id="nav-history-tab" data-bs-toggle="tab" data-bs-target="#nav-history" type="button" role="tab" aria-controls="nav-history" aria-selected="false">Order History</button>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-add-student" role="tabpanel" aria-labelledby="nav-add-student-tab">
+
+        <form class="form" method="post" action="#" th:action="@{/admin/add-student}" th:object="${studentRequest}" autocomplete="off">
+          <input type="hidden" name="token" th:value="${token}" />
+          <div class="mb-3">
+            <label for="studentId" class="form-label">Unique student Id</label>
+            <input type="text" class="form-control" th:field="*{id}" id="studentId" placeholder="Unique Student Id">
+          </div>
+          <div class="mb-3">
+            <label for="studentName" class="form-label">Name</label>
+            <input type="text" class="form-control" th:field="*{name}" id="studentName" placeholder="Unique Student Id">
+          </div>
+
+          <div class="mb-3">
+            <label for="studentCourse" class="form-label">Course</label>
+            <input type="text" class="form-control" th:field="*{course}" id="studentCourse" placeholder="Unique Student Id">
+          </div>
+          <div class="mb-3">
+            <label for="studentBranch" class="form-label">Branch</label>
+            <input type="text" class="form-control" th:field="*{branch}" id="studentBranch" placeholder="Unique Student Id">
+          </div>
+          <div class="mb-3">
+            <label for="studentAaid" class="form-label">Aaid</label>
+            <input type="text" class="form-control" th:field="*{aaid}" id="studentAaid" placeholder="Unique Student Id">
+          </div>
+          <input type="submit" class="btn btn-outline-primary" value="Add Student">
+        </form>
+
+      </div>
+      <div class="tab-pane fade" id="nav-inventory" role="tabpanel" aria-labelledby="nav-inventory-tab">
+
+        <form class="form" method="post" action="#" th:action="@{/admin/update-inventory}" th:object="${updateInventoryRequest}"  autocomplete="off">
+          <input type="hidden" name="token" th:value="${token}" />
+          <div class="mb-3">
+            <label for="bookId" class="form-label">Book Id</label>
+            <input type="text" class="form-control" th:field="*{bookId}" id="bookId" placeholder="Book Id">
+          </div>
+          <div class="mb-3">
+            <label for="stock" class="form-label">Stock</label>
+            <input type="number" class="form-control" th:field="*{stock}" id="stock" placeholder="Stock">
+          </div>
+          <input type="submit" class="btn btn-outline-primary" value="Update Inventory">
+        </form>
+
+      </div>
+      <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Book</th>
+            <th scope="col">Student</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="history: ${orderHistory}">
+            <td th:text="${history.id}"></td>
+            <td th:text="${history.book.title}"></td>
+            <td th:text="${history.student.name}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class=" mt-4 bg-light fixed-bottom text-center text-secondary">
+  <div>&copy; Aditi & Khushi</div>
+</footer>
+</body>
+</html>
